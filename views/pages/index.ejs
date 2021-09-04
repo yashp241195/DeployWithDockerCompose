@@ -1,0 +1,30 @@
+<script>
+
+  function myFunc(){
+    var val = document.getElementById("firstname").value;
+    const xhttp = new XMLHttpRequest();
+    
+
+
+    xhttp.onload = function() {
+      document.getElementById("myval").innerHTML = this.responseText;
+      
+      setTimeout(function(){ location.reload(); }, 1000);
+
+    }
+
+    xhttp.open("POST", "update/user",true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    xhttp.send(JSON.stringify({firstname:val}));
+
+  }
+ 
+</script>
+
+<body>
+  <h2> Welcome <%= firstname %> </h2>
+  <p>Add names : </p>
+  <input id="firstname" value="" type="text">
+  <p >Your input is <span id="myval"></span> </p>
+  <button onclick="myFunc()" >submit</button>  
+</body>
