@@ -1,11 +1,13 @@
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
-var User = require('./models/user')
 var bodyParser = require('body-parser')
 var morgan = require('morgan')
-var mongoDB = 'mongodb://127.0.0.1/app01';
 var cors = require('cors')
+
+
+var mongoDB = 'mongodb://mongo:27017/userdb';
+var User = require('./models/user')
 
 
 app.use(cors())
@@ -14,10 +16,7 @@ app.use(morgan('dev'))
 
 mongoose.connect(mongoDB, 
   {useNewUrlParser: true, useUnifiedTopology: true})
-.then( async (connect) => {
-
-  const user = await new User({firstname:"Initial"})
-  user.save()
+.then((connect) => {
 
   console.log('connected to mongodb.. ')
 
@@ -55,5 +54,5 @@ app.post('/update/user', async (req,res)=>{
   })
 })
 
-app.listen(8080);
-console.log('Server is listening on port 8080');
+app.listen(5000);
+console.log('Server is listening on port 5000');
