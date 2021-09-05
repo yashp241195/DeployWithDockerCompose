@@ -16,7 +16,9 @@ app.use(morgan('dev'))
 
 mongoose.connect(mongoDB, 
   {useNewUrlParser: true, useUnifiedTopology: true})
-.then((connect) => {
+.then(async (connect) => {
+
+  var v = await new User({firstname:"initial"}).save()
 
   console.log('connected to mongodb.. ')
 
@@ -54,5 +56,5 @@ app.post('/update/user', async (req,res)=>{
   })
 })
 
-app.listen(5000);
-console.log('Server is listening on port 5000');
+app.listen(8080);
+console.log('Server is listening on port 8080');
